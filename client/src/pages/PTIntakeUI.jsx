@@ -75,12 +75,14 @@ export default function PTIntakeUI() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-bold">PT AI Assistant</h1>
+      <h1 className="text-3xl font-bold">PTelligence</h1>
 
       <Card>
         <CardContent className="space-y-4 pt-6">
+          <h3 className="font-bold">Reminder: Please remove or anonymize any personal information before pasting patient files.
+          Avoid including names, birth dates, contact info, or other details that could identify the patient.</h3>
           <Textarea
-            placeholder="Paste patient's clinical notes here"
+            placeholder="Paste patient's clinical notes here - DO NOT include any personal information"
             value={patientFile}
             onChange={(e) => setPatientFile(e.target.value)}
           />
