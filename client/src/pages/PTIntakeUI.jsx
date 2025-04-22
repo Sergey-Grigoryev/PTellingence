@@ -82,19 +82,22 @@ export default function PTIntakeUI() {
           <h3 className="font-bold">Reminder: Please remove or anonymize any personal information before pasting patient files.
           Avoid including names, birth dates, contact info, or other details that could identify the patient.</h3>
           <Textarea
-            placeholder="Paste patient's clinical notes here - DO NOT include any personal information"
+            placeholder="Paste patient's clinical notes here - DO NOT include any personal information (max: 2000 characters)"
             value={patientFile}
             onChange={(e) => setPatientFile(e.target.value)}
+            maxLength={2000}
           />
           <Textarea
-            placeholder="Describe symptoms or diagnosis"
+            placeholder="Describe symptoms or diagnosis (max: 500 characters)"
             value={symptoms}
             onChange={(e) => setSymptoms(e.target.value)}
+            maxLength={500}
           />
           <Textarea
-            placeholder="Rehab goals (e.g. return to sport, reduce pain)"
+            placeholder="Rehab goals (e.g. return to sport, reduce pain - max: 500 characters)"
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
+            maxLength={500}
           />
           <Button onClick={handleSubmit} disabled={loadingSubmit}>
             {loadingSubmit ? <Spinner /> : "Generate Recommendations and Contraindications"}

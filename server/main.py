@@ -42,7 +42,7 @@ async def generate_plan(data: IntakeRequest):
     Goal:
     {data.goal}
 
-    Respond with:
+    In as few tokens as possible, respond with:
     - Contraindications
     - Recommended exercises
     - Notes or clinical reasoning
