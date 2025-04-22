@@ -70,7 +70,7 @@ async def follow_up(data: dict):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=messages,
-        temperature=0.5
+        temperature=0.25
     )
 
     return {"response": response["choices"][0]["message"]["content"]}
