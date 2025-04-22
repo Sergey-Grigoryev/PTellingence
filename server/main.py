@@ -50,7 +50,7 @@ async def generate_plan(data: IntakeRequest):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.5
+        temperature=0.25
     )
 
     content = response["choices"][0]["message"]["content"]
