@@ -3,9 +3,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
+from dotenv import load_dotenv
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+load_dotenv()
+openai.api_key = os.getenv("PTELLINGENCE_API_KEY")
 
 app = FastAPI()
 
@@ -17,11 +19,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class IntakeRequest(BaseModel):
-    patient_name: str
     symptoms: str
     goal: str
     patient_file: str
+
 
 @app.post("/generate-plan")
 async def generate_plan(data: IntakeRequest):
@@ -52,3 +55,22 @@ async def generate_plan(data: IntakeRequest):
 
     content = response["choices"][0]["message"]["content"]
     return {"suggestions": content}
+
+
+@app.post("/follow-up")
+async def follow_up(data: dict):
+    question = data["question"]
+    chat_history = data["chat_history"]
+
+    # Format the chat history for the AI
+    messages = [{"role": msg["role"], "content": msg["content"]}
+                for msg in chat_history]
+    messages.append({"role": "user", "content": question})
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages,
+        temperature=0.5
+    )
+
+    return {"response": response["choices"][0]["message"]["content"]}
