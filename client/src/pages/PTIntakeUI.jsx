@@ -40,7 +40,7 @@ export default function PTIntakeUI() {
   const handleFollowUp = async () => {
     setLoadingFollowUp(true); // Start loading spinner
     try {
-      const res = await fetch("https://ptellingence.onrender.com/generate-plan", {
+      const res = await fetch("https://ptellingence.onrender.com/follow-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
