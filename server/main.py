@@ -48,10 +48,10 @@ async def generate_plan(data: IntakeRequest):
     - Notes or clinical reasoning
     """
 
-    response = await openai.ChatCompletion.acreate(
+    response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
+        temperature=0.25
     )
 
     content = response["choices"][0]["message"]["content"]
@@ -68,10 +68,10 @@ async def follow_up(data: dict):
                 for msg in chat_history]
     messages.append({"role": "user", "content": question})
 
-    response = await openai.ChatCompletion.acreate(
+    response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=messages,
-        temperature=0.3
+        temperature=0.25
     )
 
     return {"response": response["choices"][0]["message"]["content"]}
