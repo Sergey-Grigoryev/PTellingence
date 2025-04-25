@@ -14,7 +14,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        ('https://ptellingence-8lvy1p2nn-sergey-grigoryevs-projects.vercel.app'),],
+        ("https://ptellingence-khao784bx-sergey-grigoryevs-projects.vercel.app"),],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,7 +35,7 @@ class FollowUpRequest(BaseModel):
 @app.post("/generate-plan")
 async def generate_plan(data: IntakeRequest):
     prompt = f"""
-    You are a physical therapy assistant AI. Given the patient's medical file, symptoms, and goals,
+    You are a physical therapy assistant AI. In as few tokens as possible, given the patient's medical file, symptoms, and goals,
     recommend a safe and effective rehabilitation plan.
 
     Patient File:
@@ -47,7 +47,7 @@ async def generate_plan(data: IntakeRequest):
     Goal:
     {data.goal}
 
-    In as few tokens as possible, respond with:
+    Respond with as short bullet points, include:
     - Contraindications
     - Recommended exercises
     - Notes or clinical reasoning
