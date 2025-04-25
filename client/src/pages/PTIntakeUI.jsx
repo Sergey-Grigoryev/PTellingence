@@ -15,6 +15,7 @@ export default function PTIntakeUI() {
   const [loadingFollowUp, setLoadingFollowUp] = useState(false); // Loading state for "Follow-Up"
 
   const handleSubmit = async () => {
+    console.log("handleSubmit triggered");
     setLoadingSubmit(true); // Start loading spinner
     try {
       const res = await fetch("https://ptellingence.onrender.com/generate-plan", {
@@ -38,6 +39,7 @@ export default function PTIntakeUI() {
   };
 
   const handleFollowUp = async () => {
+    console.log("handleFollowUp triggered");
     setLoadingFollowUp(true); // Start loading spinner
     try {
       const res = await fetch("https://ptellingence.onrender.com/follow-up", {
