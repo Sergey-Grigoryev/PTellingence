@@ -14,7 +14,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ptellingence-aesq611d8-sergey-grigoryevs-projects.vercel.app"],
+        ('https://ptellingence-aesq611d8-sergey-grigoryevs-projects.vercel.app'),],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,6 +25,11 @@ class IntakeRequest(BaseModel):
     symptoms: str
     goal: str
     patient_file: str
+
+
+class FollowUpRequest(BaseModel):
+    question: str
+    chat_history: list[dict[str, str]]
 
 
 @app.post("/generate-plan")
@@ -59,9 +64,9 @@ async def generate_plan(data: IntakeRequest):
 
 
 @app.post("/follow-up")
-async def follow_up(data: dict):
-    question = data["question"]
-    chat_history = data["chat_history"]
+async def follow_up(data: FollowUpRequest):
+    question = data.question
+    chat_history = data.chat_history
 
     # Format the chat history for the AI
     messages = [{"role": msg["role"], "content": msg["content"]}

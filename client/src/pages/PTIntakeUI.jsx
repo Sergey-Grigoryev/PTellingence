@@ -17,7 +17,7 @@ export default function PTIntakeUI() {
   const handleSubmit = async () => {
     setLoadingSubmit(true); // Start loading spinner
     try {
-      const res = await fetch("https://ptellingence.onrender.com/generate-plan", {
+      const res = await fetch(`https://ptellingence.onrender.com/generate-plan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -40,12 +40,15 @@ export default function PTIntakeUI() {
   const handleFollowUp = async () => {
     setLoadingFollowUp(true); // Start loading spinner
     try {
-      const res = await fetch("https://ptellingence.onrender.com/follow-up", {
+      const res = await fetch(`https://ptellingence.onrender.com/follow-up`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question: followUpQuestion,
-          chat_history: chatHistory,
+          chat_history: chatHistory.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
         }),
       });
 
